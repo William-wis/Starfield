@@ -1,20 +1,40 @@
-//your code here
-void setup()
-{
-	//your code here
-}
-void draw()
-{
-	//your code here
-}
-class Particle
-{
-	//your code here
-}
+Particle cur;
+oddBallParticle obp;
+ArrayList<Particle> particles;
 
-class OddballParticle //inherits from Particle
-{
-	//your code here
+void setup() {
+  size(500, 500);
+  particles = new ArrayList<Particle> ();
+  createParticle();
+  obp = new oddBallParticle();
 }
 
 
+void draw() {
+  background(0);
+
+  for (int i = 0; i < particles.size(); i++) {
+    particles.get(i).move();
+  }
+
+  if (cur.reached() == true) {
+    particles.remove(cur);
+  }
+  obp.move();
+  createParticle();
+  showParticles();
+}
+
+void showParticles() {
+  for (Particle p : particles) {
+    p.show();
+  }
+  obp.show();
+}
+
+
+
+void createParticle() {
+  cur = new Particle();
+  particles.add(cur);
+}
